@@ -1,0 +1,1 @@
+//renderiza lista de denuncias
