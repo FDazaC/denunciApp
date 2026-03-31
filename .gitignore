@@ -1,0 +1,35 @@
+# --- Entorno de Desarrollo (IDE/Editores) ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- Dependencias (Por si decides usar npm/bundlers luego) ---
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --- Archivos de Compilación / Distribución ---
+dist/
+build/
+out/
+.cache/
+.parcel-cache/
+
+# --- Variables de Entorno y Secretos ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.log
+
+# --- Otros ---
+temp/
+tmp/
