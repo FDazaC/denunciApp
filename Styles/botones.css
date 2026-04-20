@@ -1,0 +1,38 @@
+.boton-NuevoReporte{
+   background: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 15px;
+    height: 40px;   
+    width: 120px;
+    position: absolute;
+    right: 100px;
+}
+
+.boton-Perfil{
+    background: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 15px;
+    height: 40px;   
+    width: 80px;
+    position: absolute;
+    right: 10px;
+}
+
+.boton-NuevoReporte:active, .boton-Perfil:active {
+    transform: scale(0.5);
+}
+
+.boton-NuevoReporte:hover, .boton-Perfil:hover {
+    background-color: #b9e2c2;
+    transform: scale(1.05);
+    transition: 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}

@@ -1,12 +1,92 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles/main.css">
+    <link rel="stylesheet" href="Styles/botones.css">
+    <link rel="stylesheet" href="Styles/logos.css">
+    <link rel="stylesheet" href="Styles/reportes.css">
+    
     <title>DenunciApp</title>
 </head>
+
 <body>
-    <h1>DenunciApp</h1>
-    
+    <header class="header-principal">
+        <img class="logoPagina" src="assets/images/logoUniReport.png">
+        <h1 style="color: rgb(40, 39, 39);">DenunciApp</h1>
+        
+        <button class="boton-NuevoReporte">+Nuevo Reporte</button>
+        <button class="boton-Perfil">
+            <img src="assets/images/perfil.png" class="logoPerfil">Perfil
+        </button>
+    </header>
+
+    <main>
+        
+        <div class="seccion-Reportes">
+            <h2 style="margin-top: 5px;">Últimos Reportes</h2>
+            <p style="margin-top: -15px;">Revisa los ultimos reportes realizados</p>
+            
+            <div class="contenedorReportes">
+                <section class="reporte">
+                    <img src="assets/images/calleRota.jpg" class="imagenReporte">
+                    <div>
+                        <h3>Calle en mal estado</h3>
+                        <p>Descripción: Cerca de la biblioteca UCN</p>
+                        <p>Publicado por: Cristiano Ronaldo</p>
+                        <p>Fecha: 19/04/2026 - 11:31 A.M</p>
+                    </div>
+                </section>
+                
+                <section class="reporte">
+                    <img src="assets/images/gotera.jpg" class="imagenReporte">
+                    <div>
+                        <h3>Gotera en el techo</h3>
+                        <p>Descripción: Edificio X, sala-107</p>
+                        <p>Publicado por: Alexis Sánchez</p>
+                        <p>Fecha: 10/04/2026 - 17:12 P.M</p>
+                    </div>
+                </section>
+
+                <section class="reporte">
+                    <img src="assets/images/canchFutbol.jpeg" class="imagenReporte">
+                    <div>
+                        <h3>Postes sin luz</h3>
+                        <p>Descripción: Cancha de futbol</p>
+                        <p>Publicado por: MatiGol2006</p>
+                        <p>Fecha: 12/03/2026 - 19:01 P.M</p>
+                    </div>
+                </section>
+
+                <section class="reporte">
+                    <img src="assets/images/pc.jpg" class="imagenReporte">
+                    <div>
+                        <h3>Pc con mal funcionamiento</h3>
+                        <p>Descripción: sala-204, el pc no prende</p>
+                        <p>Publicado por: Esteban paredes prime</p>
+                        <p>Fecha: 02/03/2026 - 12:39 P.M</p>
+                    </div>
+                </section>
+
+            </div>
+            
+        </div>
+
+        <div class="mapa">
+            <iframe src="https://www.google.com/maps?q=Universidad+Catolica+del+Norte+Coquimbo&output=embed", 
+                    width="100%", height="100%",
+                    style="border:0; border-radius: 15px;">
+            </iframe>
+            <p style="margin-top:10px; display: flex; justify-content: center;">
+                Visualiza dónde ocurren los reportes dentro de la universidad
+            </p>
+        </div>
+    </main>
+
+    <footer style="background-color: blueviolet; margin-top: 20px;">
+        xscdas
+    </footer>
 </body>
 </html>
