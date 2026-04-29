@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Styles/main.css">
+    <link rel="stylesheet" href="../Styles/botones.css">
+    <link rel="stylesheet" href="../Styles/logos.css">
+    <link rel="stylesheet" href="../Styles/reportes.css">
+    <title>Configurar Perfil - DenunciApp</title>
+</head>
+<body>
+    <header class="header-principal">
+        <img class="logoPagina" src="../assets/images/logoUniReport.png">
+        <h1 style="color: rgb(40, 39, 39);">DenunciApp</h1>
+        <a href="../index.html" class="boton-NuevoReporte">Volver al inicio</a>
+    </header>
+
+    <main>
+        <div class="seccion-Reportes" style="height: auto; min-height: 500px;">
+            <h2>Configura tu Perfil</h2>
+            <p style="text-align: center; margin-top: -15px; margin-bottom: 20px;">Completa tu información de usuario</p>
+            
+            <form action="#" style="display: flex; flex-direction: column; gap: 10px; padding: 20px;">
+                <label>Nombre Completo</label>
+                <input type="text" placeholder="Ej: Cristiano Ronaldo" style="padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+
+                <label>Correo Institucional</label>
+                <input type="email" placeholder="usuario@ucn.cl" style="padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+
+                <label>Carrera</label>
+                <input type="text" placeholder="Ej: Ingeniería Civil" style="padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+
+                <label>Foto de Perfil</label>
+                <input type="file" accept="image/*">
+
+                <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                    <button type="submit" style="background-color: #2f9e44; color: white; border: none; padding: 10px 20px; border-radius: 15px; cursor: pointer;">
+                        Guardar Cambios
+                    </button>
+                    <a href="../index.html" style="text-decoration: none; color: gray; align-self: center;">Omitir</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer style="background-color: blueviolet; margin-top: 20px; color: white; text-align: center; padding: 10px;">
+        DenunciApp - Gestión Universitaria
+    </footer>
+</body>
+</html>
