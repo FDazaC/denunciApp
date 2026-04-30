@@ -1,3 +1,7 @@
 # DenunciApp
-DenunciApp pretende ser una aplicación web que ayude tanto al estudiante como a la universidad. Esto a través de una plataforma que permite la cooperación a través de reportes para mantener informar sobre lugares de uso público que estén en mal estado o que puedan requerir algún tipo de mantenimiento.
+DenunciApp pretende ser una aplicación web que facilite la comunicación entre la universidad y los usuarios (funcionarios y estudiantes), para cooperar en el cuidado del entorno del establecimiento.
+
+Esto a través de una plataforma de reportes en la que los usuarios puedan registrarse y subir sus observaciones de espacios públicos que esten en mal estado o necesiten mantenimiento.
+
+En esta primera fase se presenta el flujo de uso que el usuario podría esperar de la aplicación.
 
