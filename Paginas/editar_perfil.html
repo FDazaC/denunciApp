@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Styles/main.css">
+    <link rel="stylesheet" href="../Styles/botones.css">
+    <link rel="stylesheet" href="../Styles/logos.css">
+    <link rel="stylesheet" href="../Styles/reportes.css">
+    <title>Editar Perfil - DenunciApp</title>
+</head>
+<body>
+    <header class="header-principal">
+        <img class="logoPagina" src="../assets/images/logoUniReport.png">
+        <h1 style="color: rgb(40, 39, 39);">DenunciApp</h1>
+        <a href="perfil.html" class="boton-NuevoReporte">Cancelar</a>
+    </header>
+
+    <main>
+        <div class="seccion-Reportes" style="height: auto;">
+            <h2>Editar Información</h2>
+            
+            <form action="perfil.html" style="display: flex; flex-direction: column; gap: 15px; padding: 20px;">
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Nombre</label>
+                    <input type="text" value="Ronaldo" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Carrera</label>
+                    <input type="text" value="Ingeniería en Fútbol" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Correo Institucional</label>
+                    <input type="email" value="ronaldo@ucn.cl" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Nueva Foto de Perfil</label>
+                    <input type="file" accept="image/*">
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                    <button type="submit" style="background-color: #2f9e44; color: white; border: none; padding: 12px 25px; border-radius: 15px; cursor: pointer; font-weight: bold;">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer style="background-color: blueviolet; margin-top: 40px; color: white; text-align: center; padding: 15px;">
+        DenunciApp - Gestión Universitaria
+    </footer>
+</body>
+</html>

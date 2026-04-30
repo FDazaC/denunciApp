@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../Styles/botones.css">
     <link rel="stylesheet" href="../Styles/logos.css">
     <link rel="stylesheet" href="../Styles/reportes.css">
-    <title>Configurar Perfil - DenunciApp</title>
+    <title>Mi Perfil - DenunciApp</title>
 </head>
 <body>
     <header class="header-principal">
@@ -17,34 +17,27 @@
     </header>
 
     <main>
-        <div class="seccion-Reportes" style="height: auto; min-height: 500px;">
-            <h2>Configura tu Perfil</h2>
-            <p style="text-align: center; margin-top: -15px; margin-bottom: 20px;">Completa tu información de usuario</p>
+        <div class="seccion-Reportes" style="height: auto; align-items: center;">
+            <h2 style="margin-top: 10px;">Perfil de Usuario</h2>
             
-            <form action="#" style="display: flex; flex-direction: column; gap: 10px; padding: 20px;">
-                <label>Nombre Completo</label>
-                <input type="text" placeholder="Ej: Cristiano Ronaldo" style="padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
-
-                <label>Correo Institucional</label>
-                <input type="email" placeholder="usuario@ucn.cl" style="padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
-
-                <label>Carrera</label>
-                <input type="text" placeholder="Ej: ITI" style="padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
-
-                <label>Foto de Perfil</label>
-                <input type="file" accept="image/*">
-
-                <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
-                    <button type="submit" style="background-color: #2f9e44; color: white; border: none; padding: 10px 20px; border-radius: 15px; cursor: pointer;">
-                        Guardar Cambios
-                    </button>
-                    <a href="../index.html" style="text-decoration: none; color: gray; align-self: center;">Omitir</a>
+            <div class="reporte" style="height: auto; flex-direction: column; padding: 30px; margin-top: 20px;">
+                <img src="../assets/images/perfil.png" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid #2f9e44;">
+                
+                <div style="text-align: center; margin-top: 15px;">
+                    <h3 style="font-size: 1.5rem;">Ronaldo</h3>
+                    <p style="color: #666; margin: 5px 0;"><strong>Carrera:</strong> Ingeniería en Fútbol</p>
+                    <p style="color: #666; margin: 5px 0;"><strong>Correo:</strong> ronaldo@ucn.cl</p>
+                    <p style="color: #666; margin: 5px 0;"><strong>Reportes realizados:</strong> 9</p>
                 </div>
-            </form>
+
+                <a href="editar_perfil.html" class="boton-NuevoReporte" style="position: static; margin-top: 20px; width: 150px; background-color: #2f9e44; color: white; text-decoration: none;">
+                    Editar Datos
+                </a>
+            </div>
         </div>
     </main>
 
-    <footer style="background-color: blueviolet; margin-top: 20px; color: white; text-align: center; padding: 10px;">
+    <footer style="background-color: blueviolet; margin-top: 40px; color: white; text-align: center; padding: 15px;">
         DenunciApp - Gestión Universitaria
     </footer>
 </body>
