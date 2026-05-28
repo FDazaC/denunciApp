@@ -49,11 +49,7 @@ export default function SignUp() {
                 password,
             });
 
-            localStorage.setItem(
-                "token",
-                data.token
-            );
-
+            localStorage.setItem("token",data.token);
             navigate("/inicio");
 
         } catch (err: any) {
