@@ -1,1 +1,0 @@
-//objeto global guarda los reportes cargados

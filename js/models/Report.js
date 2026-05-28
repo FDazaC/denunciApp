@@ -1,1 +1,0 @@
-//interfaz que define que es un reporte
