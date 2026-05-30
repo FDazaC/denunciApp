@@ -24,7 +24,7 @@ export default function Navbar() {
 
             <div className="flex items-center gap-4">
 
-                <button onClick={() => navigate("/nuevo-reporte")}
+                <button onClick={() => navigate("/crear-reporte")}
                     className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-xl transition">
                     <FiPlusCircle />Nuevo Reporte
                 </button>

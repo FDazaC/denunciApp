@@ -2,7 +2,6 @@ import Navbar from "../Components/NavBar";
 import ReportCard from "../Components/ReportCard";
 
 export default function Inicio() {
-
     const reportes = [
         {
         titulo: "Calle en mal estado",

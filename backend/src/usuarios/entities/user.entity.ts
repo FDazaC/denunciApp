@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import { Publicacion } from '../../publicaciones/entities/publicacion.entity';
 
 @Entity()
 export class User {
@@ -12,6 +13,9 @@ export class User {
     rut!: string;
     @Column()
     password!: string;
+    @OneToMany(
+        () => Publicacion,(publicacion) => publicacion.usuario,)
+        publicaciones!: Publicacion[];
     @CreateDateColumn()
     createdAt!: Date;
 }
