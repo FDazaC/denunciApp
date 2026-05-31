@@ -1,6 +1,5 @@
-import {Injectable,BadRequestException,} from '@nestjs/common';
+import {Injectable,BadRequestException, NotFoundException, ForbiddenException} from '@nestjs/common';
 import { SupabaseService } from '../supabase/supabase.service';
-import { memoryStorage } from 'multer';
 import { Publicacion } from './entities/publicacion.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -9,13 +8,14 @@ import { User } from '../usuarios/entities/user.entity';
 
 @Injectable()
 export class PublicacionesService {
+
     constructor(
         @InjectRepository(Publicacion)
         private publicacionesRepository: Repository<Publicacion>,
         private readonly supabaseService: SupabaseService,
     ) {}
 
-    async uploadImage(file: Express.Multer.File) {
+    async uploadImage(file: any) {
         if (!file) {throw new BadRequestException('No se envió archivo',);}
         const supabase = this.supabaseService.getClient();
 
@@ -56,5 +56,46 @@ export class PublicacionesService {
         return await this.publicacionesRepository.save(
             publicacion,
         );
+    }
+
+    async findAll() {
+        return await this.publicacionesRepository.find({
+            order: {
+                createdAt: 'DESC',
+            },
+        });
+    }
+
+    async findOne(id: number){
+        const publicacion = await this.publicacionesRepository.findOne({
+            where: { id },
+        });
+
+        if(!publicacion){throw new NotFoundException('Publicacion no encontrada');}
+
+        return publicacion;
+    }
+
+    async update(id: number, dto: PublicacionDto, user: any){
+        const publicacion = await this.findOne(id);
+        if(publicacion.usuario.id !== user.sub){throw new ForbiddenException('No puedes modificar este reporte')}
+        await this.publicacionesRepository.update(id,dto);
+        return this.findOne(id);
+    }
+
+    async remove(id: number, user: any){
+        const publicacion = await this.findOne(id);
+        if (publicacion.usuario.id !== user.sub) {
+            throw new ForbiddenException('No puedes eliminar esta publicación');
+        }
+        
+
+        if(publicacion.imagenUrl){
+            const supabase = this.supabaseService.getClient();
+            const fileName = publicacion.imagenUrl.split('/').pop();
+            if(fileName){ await supabase.storage.from(process.env.SUPABASE_BUCKET!,).remove([fileName]);}
+        }
+        await this.publicacionesRepository.remove(publicacion);
+        return { message: 'Reporte Eliminado'};
     }
 }
