@@ -15,6 +15,15 @@ export class UsersService {
     findByEmail(email: string) {
         return this.userRepository.findOne({
         where: { email },
+        select:{
+            id: true,
+            nombre: true,
+            email: true,
+            rut: true,
+            password: true,
+            rol: true,
+            createdAt: true,
+        }
         });
     }
 

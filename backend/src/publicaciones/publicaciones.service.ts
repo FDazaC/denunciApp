@@ -98,4 +98,25 @@ export class PublicacionesService {
         await this.publicacionesRepository.remove(publicacion);
         return { message: 'Reporte Eliminado'};
     }
+
+    async misReportes(userId: string){
+        return await this.publicacionesRepository.find({
+            where: {
+                usuario: {
+                    id: userId,
+                },
+            },
+            order: {
+                createdAt: 'DESC',
+            },
+        });
+    }
+
+    async updateEstado(id: number, estado: string, user: any){
+        if(user.rol !== 'admin'){throw new ForbiddenException('Acceso no autorizado')}
+        const publicacion = await this.findOne(id);
+        publicacion.estado = estado;
+
+        return await this.publicacionesRepository.save(publicacion);
+    }
 }

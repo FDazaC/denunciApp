@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {uploadImage,createPublicacion} from "../Services/publicaciones.service";
 import "../styles/CrearReporte.css";
 
@@ -7,6 +8,7 @@ export default function CrearReporte() {
     const [descripcion, setDescripcion] = useState("");
     const [imagen, setImagen] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -33,6 +35,8 @@ export default function CrearReporte() {
             setDescripcion("");
             setImagen(null);
 
+            navigate("/inicio");
+
         } catch (error) {
             console.error(error);
             alert("Error al crear reporte");
@@ -43,7 +47,11 @@ export default function CrearReporte() {
 
     return (
         <div className="crear-reporte-page">
+
             <form className="crear-reporte-form" onSubmit={handleSubmit}>
+                <button type="button" onClick={() => navigate("/inicio")} className="volver-btn">
+                    Volver al inicio
+                </button>
                 <h1>Crear Reporte</h1>
 
                 <input
@@ -93,7 +101,8 @@ export default function CrearReporte() {
                         ? "Publicando..."
                         : "Publicar reporte"}
                 </button>
-
+                
+                <h1>Vista previa</h1>
                 {imagen && (
                     <img
                         src={URL.createObjectURL(imagen)}

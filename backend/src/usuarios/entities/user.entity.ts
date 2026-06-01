@@ -11,8 +11,10 @@ export class User {
     email!: string;
     @Column({unique: true,})
     rut!: string;
-    @Column()
+    @Column({select: false})
     password!: string;
+    @Column({default: 'user'})
+    rol!: string;
     @OneToMany(
         () => Publicacion,(publicacion) => publicacion.usuario,)
         publicaciones!: Publicacion[];

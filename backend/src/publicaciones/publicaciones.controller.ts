@@ -1,4 +1,4 @@
-import {Body,Controller,Get,Post,Patch,Delete, Req, UseGuards, UploadedFile,UseInterceptors} from '@nestjs/common';
+import {Body,Controller,Get,Post,Patch,Delete, Req, UseGuards, UploadedFile,UseInterceptors, ParseIntPipe} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Param } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -17,8 +17,14 @@ export class PublicacionesController {
         return this.publicacionesService.findAll();
     }
 
+    @UseGuards(JwtAuthGuard)
+    @Get('mis-reportes')
+    misReportes(@Req() req: Request & {user: any}){
+        return this.publicacionesService.misReportes(req.user.sub);
+    }
+
     @Get(':id')
-    findById(@Param('id') id: string) {
+    findById(@Param('id', ParseIntPipe) id: string) {
         return this.publicacionesService.findOne(Number(id));
     }
 
@@ -59,6 +65,20 @@ export class PublicacionesController {
     @Delete(':id')
     remove(@Param('id') id:string, @Req() req: Request & { user: any },){
         return this.publicacionesService.remove(Number(id), req.user);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Patch(':id/estado')
+    updateEstado(
+        @Param('id') id: string,
+        @Body() body: { estado: string },
+        @Req() req: Request & { user: any },
+    ){
+        return this.publicacionesService.updateEstado(
+            Number(id),
+            body.estado,
+            req.user,
+        );
     }
 
 }
