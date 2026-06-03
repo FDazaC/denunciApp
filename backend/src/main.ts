@@ -3,9 +3,12 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+
+  console.log('DATABASE_URL:', process.env.DATABASE_URL); //  este log verifica que la variable de entorno se está leyendo correctamente
+
   const app = await NestFactory.create(AppModule);
   
-  //Se habilita el cors para que el front pueda consumir la API
+  
   app.enableCors({
     origin: 'http://localhost:5173',
     methods: 'GET,HAED,PUT,PATCH,POST,DELETE',

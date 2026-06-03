@@ -1,4 +1,4 @@
-import { Injectable, ConflictException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,7 +16,7 @@ export class UsersService {
       const newUser = this.userRepository.create(createUserDto);
       await this.userRepository.save(newUser);
       
-      // Devolvemos el usuario sin la contraseña
+      
       const { password, ...result } = newUser;
       return result;
       
@@ -28,7 +28,32 @@ export class UsersService {
     }
   }
 
- 
+  async findOne(id: string) {
+    const user = await this.userRepository.findOne({ where: { id }, select: {id: true, nombre: true, email: true, rut: true, rol: true, createdAt: true} });
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }
+    return user;
+  }
+
+  async update(id: string, updateUserDto: any) {
+    const user = await this.userRepository.preload({
+      id: id,
+      ...updateUserDto,
+    });
+
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }
+
+    return this.userRepository.save(user);
+  }
+
+  async remove(id: string) {
+    const user = await this.findOne(id);
+    return this.userRepository.remove(user);
+  }
+
   async findOneByEmail(email: string) {
     return this.userRepository.createQueryBuilder('user')
       .where('user.email = :email', { email })

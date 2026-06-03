@@ -28,7 +28,7 @@ export class User{
     @Column({
         type: 'enum',
         enum: UserRole,
-        default: UserRole.CIUDADANO, //Todo aquel registrado por web se convierte en ciudadano
+        default: UserRole.CIUDADANO, //Todo usuario registrado por web se convierte en ciudadano
     })
 
     rol: UserRole;

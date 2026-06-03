@@ -1,14 +1,34 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { ReportsModule } from './reports/reports.module';
-import { NotificationsGateway } from './notifications/notifications.gateway';
+import { User } from './users/entities/user.entity';
 
 @Module({
-  imports: [AuthModule, UsersModule, ReportsModule],
+  imports: [
+   
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        url: configService.get<string>('DATABASE_URL'),
+        entities: [User],
+        synchronize: true,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }),
+    }),
+    UsersModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, NotificationsGateway],
+  providers: [AppService],
 })
 export class AppModule {}
