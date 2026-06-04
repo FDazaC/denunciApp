@@ -1,5 +1,5 @@
 import {Controller,Post,Body} from '@nestjs/common';
-import {ApiTags,ApiOperation,ApiBody} from '@nestjs/swagger';
+import {ApiTags,ApiOperation,ApiBody,ApiOkResponse} from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
@@ -11,12 +11,9 @@ export class AuthController {
         private authService: AuthService,
     ) {}
 
-    @ApiOperation({
-        summary: 'Registrar un nuevo usuario',
-    })
-    @ApiBody({
-        type: RegisterDto,
-    })
+    @ApiOperation({summary: 'Registrar un nuevo usuario',})
+    @ApiBody({type: RegisterDto})
+    @ApiOkResponse({description: 'Usuario registrado correctamente'})
     @Post('register')
     register(
         @Body() dto: RegisterDto,
@@ -30,6 +27,7 @@ export class AuthController {
     @ApiBody({
         type: LoginDto,
     })
+    @ApiOkResponse({description: 'Usuario logeadocorrectamente'})
     @Post('login')
     login(
         @Body() dto: LoginDto,

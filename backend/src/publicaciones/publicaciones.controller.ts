@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { PublicacionDto } from './dto/publicacion.dto';
 import { UpdateEstadoDto } from './dto/update-estado.dto';
 import { PublicacionesService } from './publicaciones.service';
-import {ApiBearerAuth,ApiBody,ApiExcludeEndpoint,ApiOperation,ApiTags} from '@nestjs/swagger';
+import {ApiBearerAuth,ApiBody,ApiExcludeEndpoint,ApiOperation,ApiTags,ApiOkResponse} from '@nestjs/swagger';
 
 @ApiTags('Publicaciones')
 @Controller('publicaciones')
@@ -15,18 +15,15 @@ export class PublicacionesController {
         private readonly publicacionesService: PublicacionesService,
     ) {}
 
-    @ApiOperation({
-        summary: 'Obtener todas las publicaciones',
-    })
+    @ApiOperation({summary: 'Obtener todas las publicaciones'})
     @Get()
     findAll() {
         return this.publicacionesService.findAll();
     }
 
     @ApiBearerAuth()
-    @ApiOperation({
-        summary: 'Obtener reportes del usuario autenticado',
-    })
+    @ApiOperation({summary: 'Obtener reportes del usuario autenticado'})
+    @ApiOkResponse({description: 'Reportes obtenidos correctamente',})
     @UseGuards(JwtAuthGuard)
     @Get('mis-reportes')
     misReportes(
@@ -37,9 +34,8 @@ export class PublicacionesController {
         );
     }
 
-    @ApiOperation({
-        summary: 'Obtener una publicación por ID',
-    })
+    @ApiOperation({summary: 'Obtener un reporte por ID'})
+    @ApiOkResponse({description: 'Reporte obtenido correctamente',})
     @Get(':id')
     findById(
         @Param('id', ParseIntPipe) id: string,
@@ -61,12 +57,9 @@ export class PublicacionesController {
     }
 
     @ApiBearerAuth()
-    @ApiOperation({
-        summary: 'Crear una publicación',
-    })
-    @ApiBody({
-        type: PublicacionDto,
-    })
+    @ApiOperation({summary: 'Crear un reporte',})
+    @ApiBody({type: PublicacionDto,})
+    @ApiOkResponse({description: 'Reporte creado correctamente'})
     @UseGuards(JwtAuthGuard)
     @Post()
     create(
@@ -80,12 +73,9 @@ export class PublicacionesController {
     }
 
     @ApiBearerAuth()
-    @ApiOperation({
-        summary: 'Editar una publicación',
-    })
-    @ApiBody({
-        type: PublicacionDto,
-    })
+    @ApiOperation({summary: 'Editar reporte'})
+    @ApiBody({type: PublicacionDto})
+    @ApiOkResponse({description: 'Reporte editado correctamente'})
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
     update(
@@ -101,9 +91,8 @@ export class PublicacionesController {
     }
 
     @ApiBearerAuth()
-    @ApiOperation({
-        summary: 'Eliminar una publicación',
-    })
+    @ApiOperation({summary: 'Eliminar una reporte'})
+    @ApiOkResponse({description: 'Reporte eliminado correctamente'})
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
     remove(
@@ -117,12 +106,9 @@ export class PublicacionesController {
     }
 
     @ApiBearerAuth()
-    @ApiOperation({
-        summary: 'Actualizar estado de una publicación (solo admin)',
-    })
-    @ApiBody({
-        type: UpdateEstadoDto,
-    })
+    @ApiOperation({summary: 'Actualizar estado de un reporte(solo admin)'})
+    @ApiBody({type: UpdateEstadoDto,})
+    @ApiOkResponse({description: 'Estado cambiado correctamente'})
     @UseGuards(JwtAuthGuard)
     @Patch(':id/estado')
     updateEstado(

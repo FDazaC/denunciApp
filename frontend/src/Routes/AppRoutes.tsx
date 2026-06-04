@@ -5,6 +5,7 @@ import SignUp from "../Pages/SignUp";
 import CrearReporte from "../Pages/CrearReporte";
 import MisReportes from "../Pages/MisReportes";
 import EditarReporte from "../Pages/EditarReporte";
+import Perfil from "../Pages/Perfil"
 
 export default function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ export default function AppRoutes() {
                 <Route path="/crear-reporte" element={<CrearReporte />}/>
                 <Route path="/mis-reportes" element={<MisReportes />}/>
                 <Route path="/editar-reporte/:id" element={<EditarReporte />}/>
+                <Route path="/perfil" element={<Perfil />} />
             </Routes>
         </BrowserRouter>
     );
