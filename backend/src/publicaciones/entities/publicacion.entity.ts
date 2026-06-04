@@ -26,6 +26,12 @@ export class Publicacion {
     })
     estado!: string;
 
+    @Column({type: 'decimal',precision: 10,scale: 8})
+    latitud!: number;
+
+    @Column({type: 'decimal',precision: 11,scale: 8})
+    longitud!: number;
+
     @CreateDateColumn()
     createdAt!: Date;
 

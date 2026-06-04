@@ -4,6 +4,8 @@ interface CreatePublicacionData {
     titulo: string;
     descripcion: string;
     imagenUrl?: string;
+    latitud: number;
+    longitud: number;
 }
 
 export async function uploadImage(file: File) {
@@ -58,6 +60,8 @@ export async function updatePublicacion(id: number,
         titulo: string;
         descripcion: string;
         imagenUrl?: string;
+        latitud: number;
+        longitud: number;
     }
 ) {
     const res = await api.patch(`/publicaciones/${id}`,data);

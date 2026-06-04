@@ -1,4 +1,4 @@
-import {IsNotEmpty,IsOptional,IsString,MaxLength,} from 'class-validator';
+import {IsNotEmpty,IsOptional,IsString,IsNumber,MaxLength} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PublicacionDto {
@@ -29,4 +29,19 @@ export class PublicacionDto {
     @IsOptional()
     @IsString()
     imagenUrl?: string;
+
+
+    @ApiProperty({
+        example: -33.4489,
+        description: 'Latitud del problema',
+    })
+    @IsNumber()
+    latitud!: number;
+
+    @ApiProperty({
+        example: -70.6693,
+        description: 'Longitud del problema',
+    })
+    @IsNumber()
+    longitud!: number;
 }
