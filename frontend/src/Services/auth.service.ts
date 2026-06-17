@@ -19,7 +19,6 @@ export async function login(data: LoginData) {
 
 export async function register(data: RegisterData) {
     const response = await api.post("/auth/register", data);
-    console.log(data);
     return response.data;
 }
 

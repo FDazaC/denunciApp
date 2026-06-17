@@ -29,22 +29,20 @@ export default function ReportCard({
             <img src={imagen} alt={titulo} className="w-full h-52 object-cover"/>
 
             <div className="p-5">
-                <h3 className="text-xl font-bold text-gray-800">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800">
                     {titulo}
                 </h3>
 
-                <p className="text-gray-600 mt-2">
+                <p className="text-gray-600 mt-2 text-sm">
                     {descripcion}
                 </p>
 
                 <div className="mt-4 text-sm text-gray-500 flex flex-col gap-1">
-                    
-                    <span>
+                    <span className="text-sm">
                         Publicado por: {usuario}
                     </span>
 
-
-                    <span>
+                    <span className="text-sm">
                         {fecha}
                     </span>
 
@@ -69,15 +67,15 @@ export default function ReportCard({
                 </div>
 
                 {(onEdit || onDelete) && (
-                    <div className="flex gap-2 mt-4">
+                    <div className="flex gap-2 mt-4 flex-col sm:flex-row">
                         {onEdit && (
-                            <button onClick={onEdit} className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition">
+                            <button onClick={onEdit} className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-3 rounded-lg transition w-full sm:w-auto">
                                 Editar
                             </button>
                         )}
 
                         {onDelete && (
-                            <button onClick={onDelete} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
+                            <button onClick={onDelete} className="bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-lg transition w-full sm:w-auto">
                                 Eliminar
                             </button>
                         )}

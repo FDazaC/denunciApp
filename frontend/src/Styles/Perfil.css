@@ -65,11 +65,13 @@
     border-radius: 12px;
     font-size: 15px;
     transition: 0.2s;
+    min-height: 44px;
 }
 
 .perfil-group input:focus {
     outline: none;
     border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .perfil-buttons {
@@ -88,6 +90,8 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
+    min-height: 48px;
+    font-size: 15px;
 }
 
 .btn-volver {
@@ -104,4 +108,114 @@
 
 .btn-guardar:hover {
     background: #4f46e5;
+}
+
+/* Tablet (600px - 900px) */
+@media (max-width: 900px) {
+    .perfil-container {
+        padding: 40px 20px;
+    }
+
+    .perfil-card {
+        padding: 30px;
+        border-radius: 20px;
+    }
+
+    .perfil-card h1 {
+        font-size: 1.75rem;
+    }
+
+    .perfil-group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile (max-width: 600px) */
+@media (max-width: 600px) {
+    .perfil-page {
+        min-height: calc(100vh - 60px);
+    }
+
+    .perfil-container {
+        padding: 24px 16px;
+    }
+
+    .perfil-card {
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .perfil-card h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .perfil-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+
+    .perfil-form {
+        gap: 16px;
+    }
+
+    .perfil-group {
+        gap: 6px;
+    }
+
+    .perfil-group label {
+        font-size: 14px;
+    }
+
+    .perfil-group input {
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    .perfil-buttons {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .btn-volver,
+    .btn-guardar {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+}
+
+/* Small mobile (max-width: 375px) */
+@media (max-width: 375px) {
+    .perfil-container {
+        padding: 20px 12px;
+    }
+
+    .perfil-card {
+        padding: 16px;
+    }
+
+    .perfil-card h1 {
+        font-size: 1.35rem;
+    }
+
+    .perfil-avatar {
+        width: 72px;
+        height: 72px;
+        font-size: 28px;
+    }
+
+    .btn-volver,
+    .btn-guardar {
+        padding: 11px;
+        font-size: 13px;
+    }
 }

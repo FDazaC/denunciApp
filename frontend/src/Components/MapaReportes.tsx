@@ -52,8 +52,9 @@ export default function MapaReportes({reportes}: Props) {
                 width: "100%",
                 borderRadius: "12px",
             }}
+            className="mapa-reportes"
         >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; OpenStreetMap contributors'/>
 
             {reportes.map((reporte) => (
                 <Marker
@@ -62,10 +63,11 @@ export default function MapaReportes({reportes}: Props) {
                     icon={getEstadoIcon(reporte.estado)}
                 >
                     <Popup>
-                        <h3>{reporte.titulo}</h3>
-
-                        <p>Estado: {reporte.estado}</p>
-                        <p>Usuario:{" "}{reporte.usuario?.nombre}</p>
+                        <div className="text-sm">
+                            <h3 className="font-bold text-gray-800">{reporte.titulo}</h3>
+                            <p className="text-xs text-gray-600">Estado: {reporte.estado}</p>
+                            <p className="text-xs text-gray-600">Usuario: {reporte.usuario?.nombre}</p>
+                        </div>
                     </Popup>
                 </Marker>
             ))}
