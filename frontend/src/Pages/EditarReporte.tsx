@@ -9,6 +9,8 @@ export default function EditarReporte() {
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [imagenUrl, setImagenUrl] = useState("");
+    const [latitud, setLatitud] = useState(0);
+    const [longitud, setLongitud] = useState(0);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -22,6 +24,8 @@ export default function EditarReporte() {
             setTitulo(reporte.titulo);
             setDescripcion(reporte.descripcion);
             setImagenUrl(reporte.imagenUrl ?? "");
+            setLatitud(reporte.latitud ?? 0);
+            setLongitud(reporte.longitud ?? 0);
 
         } catch (error) {
             console.error(error);
@@ -39,6 +43,8 @@ export default function EditarReporte() {
                     titulo,
                     descripcion,
                     imagenUrl,
+                    latitud,
+                    longitud,
                 }
             );
 

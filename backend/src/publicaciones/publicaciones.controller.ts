@@ -6,7 +6,9 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { PublicacionDto } from './dto/publicacion.dto';
 import { UpdateEstadoDto } from './dto/update-estado.dto';
 import { PublicacionesService } from './publicaciones.service';
-import {ApiBearerAuth,ApiBody,ApiExcludeEndpoint,ApiOperation,ApiTags,ApiOkResponse} from '@nestjs/swagger';
+import {ApiBearerAuth,ApiBody,ApiExcludeEndpoint,ApiOperation,ApiTags,ApiOkResponse,ApiNotFoundResponse,
+    ApiCreatedResponse,ApiBadRequestResponse,ApiForbiddenResponse,ApiUnauthorizedResponse
+} from '@nestjs/swagger';
 
 @ApiTags('Publicaciones')
 @Controller('publicaciones')
@@ -24,6 +26,15 @@ export class PublicacionesController {
     @ApiBearerAuth()
     @ApiOperation({summary: 'Obtener reportes del usuario autenticado'})
     @ApiOkResponse({description: 'Reportes obtenidos correctamente',})
+    @ApiUnauthorizedResponse({ 
+        description: 'Token inválido o no enviado',
+        schema: {
+            example: {
+                statusCode: 401,
+                message: 'Unauthorized',
+            },
+        },
+     })
     @UseGuards(JwtAuthGuard)
     @Get('mis-reportes')
     misReportes(
@@ -36,6 +47,16 @@ export class PublicacionesController {
 
     @ApiOperation({summary: 'Obtener un reporte por ID'})
     @ApiOkResponse({description: 'Reporte obtenido correctamente',})
+    @ApiNotFoundResponse({
+        description: 'Reporte no encontrado',
+        schema: {
+            example: {
+                statusCode: 404,
+                message: 'Reporte no encontrado',
+                error: 'Not Found',
+            },
+        },
+    })
     @Get(':id')
     findById(
         @Param('id', ParseIntPipe) id: string,
@@ -59,7 +80,18 @@ export class PublicacionesController {
     @ApiBearerAuth()
     @ApiOperation({summary: 'Crear un reporte',})
     @ApiBody({type: PublicacionDto,})
-    @ApiOkResponse({description: 'Reporte creado correctamente'})
+    @ApiCreatedResponse({ description: 'Reporte creado correctamente' })
+    @ApiBadRequestResponse({ 
+        description: 'Datos inválidos',
+        schema: {
+            example: {
+                statusCode: 400,
+                message: ['titulo no puede estar vacio'],
+                error: 'Bad Request',
+            },
+        },
+    })
+    @ApiUnauthorizedResponse({ description: 'No autenticado' })
     @UseGuards(JwtAuthGuard)
     @Post()
     create(
@@ -76,6 +108,9 @@ export class PublicacionesController {
     @ApiOperation({summary: 'Editar reporte'})
     @ApiBody({type: PublicacionDto})
     @ApiOkResponse({description: 'Reporte editado correctamente'})
+    @ApiUnauthorizedResponse({description: 'No autenticado',})
+    @ApiForbiddenResponse({description: 'No puedes modificar este reporte',})
+    @ApiNotFoundResponse({description: 'Reporte no encontrado',})
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
     update(
@@ -93,6 +128,9 @@ export class PublicacionesController {
     @ApiBearerAuth()
     @ApiOperation({summary: 'Eliminar una reporte'})
     @ApiOkResponse({description: 'Reporte eliminado correctamente'})
+    @ApiUnauthorizedResponse({ description: 'No autenticado' })
+    @ApiForbiddenResponse({ description: 'No puedes eliminar este reporte' })
+    @ApiNotFoundResponse({ description: 'Reporte no encontrado' })
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
     remove(
@@ -109,6 +147,9 @@ export class PublicacionesController {
     @ApiOperation({summary: 'Actualizar estado de un reporte(solo admin)'})
     @ApiBody({type: UpdateEstadoDto,})
     @ApiOkResponse({description: 'Estado cambiado correctamente'})
+    @ApiUnauthorizedResponse({ description: 'No autenticado' })
+    @ApiForbiddenResponse({ description: 'No tienes permisos de administrador' })
+    @ApiNotFoundResponse({ description: 'Reporte no encontrado' })
     @UseGuards(JwtAuthGuard)
     @Patch(':id/estado')
     updateEstado(
