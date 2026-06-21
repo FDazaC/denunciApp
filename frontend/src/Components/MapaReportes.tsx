@@ -1,8 +1,13 @@
-import {MapContainer,TileLayer,Marker,Popup} from "react-leaflet";
+import { useEffect } from "react";
+import {MapContainer,TileLayer,Marker,Popup,useMap} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import type { DeviceLocation } from "../Services/device.service";
+import type { Reporte } from "../Types/reportes";
+
 interface Props {
-    reportes: any[];
+    reportes: Reporte[];
+    currentLocation?: DeviceLocation | null;
 }
 
 const redIcon = new L.Icon({
@@ -26,6 +31,25 @@ const greenIcon = new L.Icon({
     iconAnchor: [12, 41],
 });
 
+const blueIcon = new L.Icon({
+    iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+    shadowUrl:"https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+});
+
+function CenterMap({ currentLocation }: { currentLocation?: DeviceLocation | null }) {
+    const map = useMap();
+
+    useEffect(() => {
+        if (currentLocation) {
+            map.setView([currentLocation.lat, currentLocation.lng], 14);
+        }
+    }, [currentLocation, map]);
+
+    return null;
+}
+
 function getEstadoIcon(estado: string) {
     switch (estado) {
         case "pendiente":
@@ -42,10 +66,14 @@ function getEstadoIcon(estado: string) {
     }
 }
 
-export default function MapaReportes({reportes}: Props) {
+export default function MapaReportes({reportes, currentLocation}: Props) {
+    const center: L.LatLngExpression = currentLocation
+        ? [currentLocation.lat, currentLocation.lng]
+        : [-29.9027, -71.2519];
+
     return (
         <MapContainer
-            center={[-29.9027, -71.2519]}
+            center={center}
             zoom={12}
             style={{
                 height: "600px",
@@ -55,6 +83,20 @@ export default function MapaReportes({reportes}: Props) {
             className="mapa-reportes"
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; OpenStreetMap contributors'/>
+            <CenterMap currentLocation={currentLocation} />
+
+            {currentLocation && (
+                <Marker
+                    position={[currentLocation.lat, currentLocation.lng]}
+                    icon={blueIcon}
+                >
+                    <Popup>
+                        <span className="text-sm font-semibold text-gray-800">
+                            Tu ubicacion actual
+                        </span>
+                    </Popup>
+                </Marker>
+            )}
 
             {reportes.map((reporte) => (
                 <Marker
@@ -72,5 +114,7 @@ export default function MapaReportes({reportes}: Props) {
                 </Marker>
             ))}
         </MapContainer>
+
+        
     );
 }

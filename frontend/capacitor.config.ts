@@ -3,7 +3,15 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.denunciapp.app',
   appName: 'DenunciApp',
-  webDir: 'dist'
+  webDir: 'dist',
+  plugins: {
+    Geolocation: {
+      permissions: ['location'],
+    },
+    Camera: {
+      permissions: ['camera', 'photos'],
+    },
+  },
 };
 
 export default config;

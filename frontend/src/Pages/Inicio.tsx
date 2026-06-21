@@ -3,17 +3,22 @@ import Navbar from "../Components/NavBar";
 import ReportCard from "../Components/ReportCard";
 import MapaReportes from "../Components/MapaReportes";
 import { getPublicaciones, updateEstadoPublicacion } from "../Services/publicaciones.service";
+import { getCurrentDeviceLocation, type DeviceLocation } from "../Services/device.service";
+import Toast from "../Components/Toast";
+import type { Reporte } from "../Types/reportes";
 
 export default function Inicio() {
-    const [reportes, setReportes] = useState<any[]>([]);
-    const [ultimosReportes, setUltimosReportes] = useState<any[]>([]);
+    const [reportes, setReportes] = useState<Reporte[]>([]);
+    const [filterStatus, setFilterStatus] = useState<string>("all");
+    const [ubicacionActual, setUbicacionActual] = useState<DeviceLocation | null>(null);
+    const [toastMessage, setToastMessage] = useState<string | null>(null);
+    const [toastType, setToastType] = useState<"info"|"success"|"error">("info");
 
     useEffect(() => {
         async function cargarReportes() {
             try {
                 const data = await getPublicaciones();
                 setReportes(data);
-                setUltimosReportes(data.slice(0, 3));
             } catch (error) {
                 console.error(error);
             }
@@ -22,11 +27,24 @@ export default function Inicio() {
         cargarReportes();
     }, []);
 
+    useEffect(() => {
+        async function cargarUbicacionActual() {
+            const location = await getCurrentDeviceLocation();
+            setUbicacionActual(location);
+
+            if (location === null) {
+                setToastMessage("No se pudo obtener ubicación. Verifica los permisos.");
+                setToastType("error");
+            }
+        }
+
+        cargarUbicacionActual();
+    }, []);
+
     async function cambiarEstado(id: number, estado: string) {
         try {
             await updateEstadoPublicacion(id, estado);
-            setReportes((prev) =>prev.map((r) => r.id === id ? { ...r, estado } : r));
-            setUltimosReportes((prev) => prev.map((r) => r.id === id ? { ...r, estado } : r));
+            setReportes((prev) => prev.map((r) => r.id === id ? { ...r, estado } : r));
         } catch (e) {
             console.log(e);
             alert("Error al cambiar estado");
@@ -34,10 +52,10 @@ export default function Inicio() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-100">
+        <div className="min-h-screen bg-slate-100 pb-24">
             <Navbar />
 
-            <main className="max-w-7xl mx-auto px-6 py-10">
+            <main className="max-w-7xl mx-auto px-6 py-10 pb-28">
                 <div className="mb-10">
                     <h2 className="text-4xl font-bold text-gray-800">
                         Últimos Reportes
@@ -46,25 +64,37 @@ export default function Inicio() {
                     <p className="text-gray-500 mt-2">
                         Revisa los últimos problemas reportados
                     </p>
+                    <div className="mt-4 flex items-center gap-3">
+                        <label className="text-sm text-gray-600">Filtrar por estado:</label>
+                        <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="border rounded-md px-3 py-2">
+                            <option value="all">Todos</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="en_revision">En revisión</option>
+                            <option value="resuelto">Resuelto</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-1">
                         <div className="flex flex-col gap-6">
-                            {ultimosReportes.map((reporte) => (
-                                <ReportCard
-                                    key={reporte.id}
-                                    titulo={reporte.titulo}
-                                    descripcion={reporte.descripcion}
-                                    usuario={reporte.usuario?.nombre ?? "Usuario"}
-                                    fecha={new Date(reporte.createdAt).toLocaleDateString("es-CL")}
-                                    imagen={reporte.imagenUrl || "https://placehold.co/600x400"}
-                                    estado={reporte.estado}
-                                    onEstadoChange={(estado) =>
-                                        cambiarEstado(reporte.id, estado)
-                                    }
-                                />
-                            ))}
+                            {reportes
+                                .filter(r => filterStatus === "all" ? true : r.estado === filterStatus)
+                                .slice(0, 3)
+                                .map((reporte) => (
+                                    <ReportCard
+                                        key={reporte.id}
+                                        titulo={reporte.titulo}
+                                        descripcion={reporte.descripcion}
+                                        usuario={reporte.usuario?.nombre ?? "Usuario"}
+                                        fecha={new Date(reporte.createdAt).toLocaleDateString("es-CL")}
+                                        imagen={reporte.imagenUrl || "https://placehold.co/600x400"}
+                                        estado={reporte.estado}
+                                        onEstadoChange={(estado) =>
+                                            cambiarEstado(reporte.id, estado)
+                                        }
+                                    />
+                                ))}
                         </div>
                     </div>
 
@@ -74,7 +104,10 @@ export default function Inicio() {
                                 Mapa de Reportes
                             </h3>
 
-                            <MapaReportes reportes={reportes} />
+                            <MapaReportes
+                                reportes={reportes.filter(r => filterStatus === "all" ? true : r.estado === filterStatus)}
+                                currentLocation={ubicacionActual}
+                            />
 
                             <div className="flex flex-wrap gap-6 mt-4">
                                 <div className="flex items-center gap-2">
@@ -102,6 +135,7 @@ export default function Inicio() {
                     </div>
                 </div>
             </main>
+            <Toast message={toastMessage} type={toastType} onClose={() => setToastMessage(null)} />
         </div>
     );
 }

@@ -2,9 +2,18 @@ import { FiUser, FiPlusCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+
 export default function Navbar() {
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const esAdmin = user?.rol === "admin";
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("user");
+        navigate("/login");
+        setMobileMenuOpen(false);
+    };
 
     return (
         <header className="w-full bg-white shadow-md px-4 py-3 flex items-center justify-between sticky top-0 z-50">
@@ -72,10 +81,21 @@ export default function Navbar() {
                             Mis Reportes
                         </button>
                         
+                        {esAdmin && (
+                            <button onClick={() => { navigate("/admin/publicaciones"); setMobileMenuOpen(false); }}
+                                className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-3 py-3 rounded-lg transition text-sm font-medium w-full">
+                                Gestionar publicaciones
+                            </button>
+                        )}
+
                         <button onClick={() => { navigate("/perfil"); setMobileMenuOpen(false); }}
-                        className="flex items-center gap-2 border border-gray-300 hover:bg-gray-100 px-3 py-3 rounded-lg transition text-sm font-medium w-full">
+                        className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-3 py-3 rounded-lg transition text-sm font-medium w-full">
                             <FiUser className="text-base" />
                             Perfil
+                        </button>
+
+                        <button onClick={handleLogout} className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-3 rounded-lg transition text-sm font-medium w-full">
+                            Cerrar sesión
                         </button>
                     </div>
                 </div>

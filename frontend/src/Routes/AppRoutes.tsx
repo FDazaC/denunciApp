@@ -6,6 +6,7 @@ import CrearReporte from "../Pages/CrearReporte";
 import MisReportes from "../Pages/MisReportes";
 import EditarReporte from "../Pages/EditarReporte";
 import Perfil from "../Pages/Perfil"
+import AdminPublicaciones from "../Pages/AdminPublicaciones";
 import BottomNav from "../Components/BottomNav";
 
 function AppLayout() {
@@ -18,10 +19,12 @@ function AppLayout() {
         <>
             <Routes>
                 <Route path="/" element={<Login />}/>
+                <Route path="/login" element={<Login />}/>
                 <Route path="/register" element={<SignUp />}/>
                 <Route path="/inicio" element={<Inicio />}/>
                 <Route path="/crear-reporte" element={<CrearReporte />}/>
                 <Route path="/mis-reportes" element={<MisReportes />}/>
+                <Route path="/admin/publicaciones" element={<AdminPublicaciones />}/>
                 <Route path="/editar-reporte/:id" element={<EditarReporte />}/>
                 <Route path="/perfil" element={<Perfil />} />
             </Routes>

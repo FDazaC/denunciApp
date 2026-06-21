@@ -3,7 +3,7 @@
     background: #f1f5f9;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 2rem;
 }
 
@@ -64,6 +64,12 @@
 
 .crear-reporte-form input[type="file"] {
     display: none;
+}
+
+.acciones-imagen {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
 }
 
 /* Botón personalizado para archivo */
@@ -186,6 +192,7 @@
         padding: 1rem;
         border-radius: 12px;
         gap: 0.75rem;
+        padding-bottom: calc(64px + 2rem);
     }
 
     .crear-reporte-form h1 {
@@ -208,6 +215,11 @@
         padding: 0.75rem;
         border-radius: 10px;
         font-size: 14px;
+    }
+
+    .acciones-imagen {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
     }
 
     .nombre-archivo {
