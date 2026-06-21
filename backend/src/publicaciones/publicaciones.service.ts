@@ -82,12 +82,7 @@ export class PublicacionesService {
     }
 
     async remove(id: number, user: any) {
-        console.log('=== DEBUG REMOVE ===');
-        console.log('user del token:', JSON.stringify(user));
         const publicacion = await this.findOne(id);
-        console.log('publicacion.usuario:', JSON.stringify(publicacion.usuario));
-        console.log('esAdmin:', user.rol === 'admin');
-        console.log('esDuenio:', String(publicacion.usuario?.id) === String(user.sub));
         const esAdmin = user.rol === 'admin';
         const esDuenio = String(publicacion.usuario.id) === String(user.sub);
 
