@@ -1,6 +1,7 @@
 .perfil-page {
     min-height: 100vh;
     background: #f1f5f9;
+    box-sizing: border-box;
 }
 
 .perfil-container {
@@ -132,17 +133,50 @@
 }
 
 /* Mobile (max-width: 600px) */
-@media (max-width: 600px) {
-    .perfil-page {
-        min-height: calc(100vh - 60px);
-    }
-
+@media (orientation: landscape) and (min-width: 850px) {
     .perfil-container {
-        padding: 24px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding: 40px 24px;
     }
 
     .perfil-card {
-        padding: 20px;
+        max-width: 1000px;
+        width: 100%;
+        padding: 36px;
+    }
+
+    .perfil-form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .perfil-group {
+        flex: 1 1 calc(50% - 16px);
+        min-width: 220px;
+    }
+
+    .perfil-buttons {
+        justify-content: space-between;
+        gap: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .perfil-page {
+        min-height: 100vh;
+        padding-bottom: 120px;
+    }
+
+    .perfil-container {
+        padding: 24px 16px 20px;
+    }
+
+    .perfil-card {
+        padding: 20px 20px 28px;
         border-radius: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
@@ -190,6 +224,10 @@
         padding: 12px;
         border-radius: 10px;
         font-size: 14px;
+    }
+
+    .perfil-card {
+        padding-bottom: 24px;
     }
 }
 

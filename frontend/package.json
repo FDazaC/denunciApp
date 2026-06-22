@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@capacitor/android": "^8.4.0",
+    "@capacitor/app": "^8.1.0",
     "@capacitor/camera": "^8.2.0",
     "@capacitor/core": "^8.4.0",
     "@capacitor/geolocation": "^8.2.0",
+    "@capacitor/local-notifications": "^8.2.0",
     "@tailwindcss/vite": "^4.3.0",
     "axios": "^1.16.1",
     "leaflet": "^1.9.4",

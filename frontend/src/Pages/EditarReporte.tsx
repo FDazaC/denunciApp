@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPublicacion,updatePublicacion } from "../Services/publicaciones.service";
+import BackButton from "../Components/BackButton";
 
 export default function EditarReporte() {
     const { id } = useParams();
@@ -61,6 +62,8 @@ export default function EditarReporte() {
     return (
         <div className="min-h-screen bg-slate-100 flex justify-center items-center p-6">
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-xl">
+                <BackButton className="mb-6" />
+
                 <h1 className="text-3xl font-bold mb-6">
                     Editar Reporte
                 </h1>

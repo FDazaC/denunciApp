@@ -8,6 +8,7 @@ import {
     chooseReportPhoto,
 } from "../Services/device.service";
 import Toast from "../Components/Toast";
+import BackButton from "../Components/BackButton";
 import MapaSelector from "../Components/MapaSelector";
 import "../styles/CrearReporte.css";
 
@@ -139,13 +140,7 @@ export default function CrearReporte() {
     return (
         <div className="crear-reporte-page">
             <form className="crear-reporte-form" onSubmit={handleSubmit}>
-                <button
-                    type="button"
-                    onClick={() => navigate("/inicio")}
-                    className="volver-btn"
-                >
-                    Volver al inicio
-                </button>
+                <BackButton className="mb-6" />
 
                 <h1>Crear Reporte</h1>
 

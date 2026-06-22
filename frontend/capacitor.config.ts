@@ -11,6 +11,10 @@ const config: CapacitorConfig = {
     Camera: {
       permissions: ['camera', 'photos'],
     },
+    LocalNotifications: {
+      smallIcon: 'ic_stat_icon',
+      iconColor: '#6366f1',
+    },
   },
 };
 

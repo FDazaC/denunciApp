@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiHome, FiUser, FiMail, FiLock, FiCreditCard, } from "react-icons/fi";
 import { register } from "../Services/auth.service";
+import { requestLocationPermission } from "../Services/device.service";
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -50,6 +51,10 @@ export default function SignUp() {
             });
 
             localStorage.setItem("token",data.token);
+            
+            // Pedir permiso de ubicación antes de ir a Inicio
+            await requestLocationPermission();
+            
             navigate("/inicio");
 
         } catch (err: any) {

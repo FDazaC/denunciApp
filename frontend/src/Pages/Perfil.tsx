@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {getProfile,updateProfile} from "../Services/users.service";
-import  Navbar  from "../Components/NavBar"
+import Navbar from "../Components/NavBar";
+import BackButton from "../Components/BackButton";
 import "../Styles/Perfil.css"
 
 export default function Perfil(){
-    const navigate = useNavigate();
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
     const [rut, setRut] = useState("");
@@ -106,14 +105,11 @@ export default function Perfil(){
 
                         <div className="perfil-buttons">
 
-                            <button
+                            <BackButton
+                                label="Volver"
+                                to="/inicio"
                                 className="btn-volver"
-                                onClick={() =>
-                                    navigate("/inicio")
-                                }
-                            >
-                                Volver
-                            </button>
+                            />
 
                             <button
                                 className="btn-guardar"

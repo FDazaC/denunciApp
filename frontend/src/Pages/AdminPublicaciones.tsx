@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Navbar from "../Components/NavBar";
+import BackButton from "../Components/BackButton";
 import Toast from "../Components/Toast";
 import ConfirmModal from "../Components/ConfirmModal";
 import ReportCard from "../Components/ReportCard";
@@ -90,7 +91,10 @@ export default function AdminPublicaciones() {
 
             <main className="max-w-5xl mx-auto px-6 py-8">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
-                    <h1 className="text-2xl font-bold">Administrar publicaciones</h1>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                        <BackButton />
+                        <h1 className="text-2xl font-bold">Administrar publicaciones</h1>
+                    </div>
 
                     <div className="flex flex-wrap items-center gap-3">
                         <input

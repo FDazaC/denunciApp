@@ -25,6 +25,10 @@ export default function Inicio() {
         }
 
         cargarReportes();
+
+        const handleUpdate = () => cargarReportes();
+        window.addEventListener("reportesUpdated", handleUpdate);
+        return () => window.removeEventListener("reportesUpdated", handleUpdate);
     }, []);
 
     useEffect(() => {
